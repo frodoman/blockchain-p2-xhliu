@@ -135,23 +135,33 @@ it('lets 2 users exchange stars', async() => {
 
 it('lets a user transfer a star', async() => {
     // 1. create a Star with different tokenId
+    let instance = await StarNotary.deployed();
+    let user1 = accounts[1];
+    let user2 = accounts[2];
+    let starId = 9876;
+
+    await instance.createStar('Star One', starId, {from: user1});
+
     // 2. use the transferStar function implemented in the Smart Contract
+    await instance.approve(user2, starId, {from: user1 });
+    await instance.transferStar(user2, starId, {from: user1});
+
     // 3. Verify the star owner changed.
+    assert.equal(await instance.ownerOf.call(starId), user2);
 });
 
 it('can get a star name by a star ID', async() => {
     // 1. create a Star with different tokenId
-    // 2. Call your method lookUptokenIdToStarInfo
-    // 3. Verify if you Star name is the same
-
     let instance = await StarNotary.deployed();
     let user1 = accounts[1];
     let starId = 22;
     let starPrice = web3.utils.toWei(".01", "ether");
     await instance.createStar('awesome star', starId, {from: user1});
 
+    // 2. Call your method lookUptokenIdToStarInfo
     let starName = await instance.lookUptokenIdToStarInfo(22, {from: user1});
 
+    // 3. Verify if you Star name is the same
     assert.equal(starName, 'awesome star');
 
 });
