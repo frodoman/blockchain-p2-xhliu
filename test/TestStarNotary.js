@@ -115,8 +115,19 @@ it('lets a user transfer a star', async() => {
     // 3. Verify the star owner changed.
 });
 
-it('lookUptokenIdToStarInfo test', async() => {
+it('can get a star name by a star ID', async() => {
     // 1. create a Star with different tokenId
     // 2. Call your method lookUptokenIdToStarInfo
     // 3. Verify if you Star name is the same
+
+    let instance = await StarNotary.deployed();
+    let user1 = accounts[1];
+    let starId = 22;
+    let starPrice = web3.utils.toWei(".01", "ether");
+    await instance.createStar('awesome star', starId, {from: user1});
+
+    let starName = await instance.lookUptokenIdToStarInfo(22, {from: user1});
+
+    assert.equal(starName, 'awesome star');
+
 });
