@@ -77,19 +77,24 @@ it('lets user2 buy a star and decreases its balance in ether', async() => {
     await instance.createStar('awesome star', starId, {from: user1});
     await instance.putStarUpForSale(starId, starPrice, {from: user1});
 
-    //let balanceOfUser1BeforeTransaction = await web3.eth.getBalance(user1);
-    const balanceOfUser2BeforeTransaction = await web3.eth.getBalance(user2);
-    //assert.equal(Number(balanceOfUser2BeforeTransaction), Number(balance));
+    const balanceOfUser2BeforeTransaction = web3.utils.toBN(await web3.eth.getBalance(user2));
 
     await instance.approve(user2, starId, { from: user1, gasPrice: gasPrice});
-    await instance.buyStar(starId, {from: user2, value: balance, gasPrice:gasPrice});
+    const txInfo = await instance.buyStar(starId, {from: user2, value: balance, gasPrice:gasPrice});
     
-    const balanceAfterUser2BuysStar = await web3.eth.getBalance(user2);
-    let gasCost = Number(balanceOfUser2BeforeTransaction) - Number(balanceAfterUser2BuysStar) - Number(starPrice);
+    const balanceAfterUser2BuysStar = web3.utils.toBN(await web3.eth.getBalance(user2));
 
-    assert(gasCost > 0);
-
+    const gasCost = await calculateGasFee(txInfo);
+    const expectedUser2Balance = balanceOfUser2BeforeTransaction.sub(web3.utils.toBN(starPrice)).sub(web3.utils.toBN(gasCost));
+    assert.equal(Number(expectedUser2Balance), Number(balanceAfterUser2BuysStar));
 });
+
+async function calculateGasFee(transactionInfo) {
+    const tx = await web3.eth.getTransaction(transactionInfo.tx);
+    const gasPrice = web3.utils.toBN(tx.gasPrice);
+    const gasUsed = web3.utils.toBN(transactionInfo.receipt.gasUsed);    
+    return gasPrice.mul(gasUsed);;
+}
 
 // Implement Task 2 Add supporting unit tests
 
