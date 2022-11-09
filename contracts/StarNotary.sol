@@ -65,8 +65,8 @@ contract StarNotary is ERC721 {
     // Implement Task 1 lookUptokenIdToStarInfo
     function lookUptokenIdToStarInfo (uint _tokenId) public view returns (string memory) {
         //1. You should return the Star saved in tokenIdToStarInfo mapping
-        string memory startName = tokenIdToStarInfo[_tokenId].name;
-        return startName;
+        Star memory star = tokenIdToStarInfo[_tokenId];
+        return star.name;
     }
 
     // Implement Task 1 Exchange Stars function
