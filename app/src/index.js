@@ -32,11 +32,13 @@ const App = {
   },
 
   createStar: async function() {
-    const { createStar } = this.meta.methods;
+    const { createStarWithNameAndSymbol } = this.meta.methods;
     const name = document.getElementById("starName").value;
     const id = document.getElementById("starId").value;
-    await createStar(name, id).send({from: this.account});
-    App.setStatus("New Star Owner is " + this.account + ".");
+    const symbol = document.getElementById("starSymbol").value
+
+    await createStarWithNameAndSymbol(name, symbol, id).send({from: this.account});
+    App.setStatus("New Star Owner is: " + this.account + "");
   },
 
   // Implement Task 4 Modify the front end of the DAPP
@@ -46,11 +48,11 @@ const App = {
 
     console.log("Lookup ID: " + id);
 
-    let starName = await lookUptokenIdToStarInfo(id).call(); //send({from: this.account});
+    let starName = await lookUptokenIdToStarInfo(id).call();
     
     console.log("Found star" + starName);
 
-    App.setStatus("Found star for ID: " + id + " " + starName);
+    App.setStatus("Found star for ID [" + id + "] Name: " + starName);
   }
 
 };
