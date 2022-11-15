@@ -28,6 +28,10 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+require('dotenv').config();
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const { INFURA_API_KEY, MNEMONIC } = process.env;
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -52,6 +56,11 @@ module.exports = {
       network_id: "*",       // Any network (default: none)
     },
 
+    goerli: {
+      provider: () => new HDWalletProvider(MNEMONIC, INFURA_API_KEY),
+      network_id: '5',
+      gas: 4465030
+    }
     // Another network with more advanced options...
     // advanced: {
       // port: 8777,             // Custom port
