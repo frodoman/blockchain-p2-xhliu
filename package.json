@@ -1,0 +1,25 @@
+{
+  "name": "blockchain-p2-xhliu",
+  "version": "1.0.0",
+  "description": "**PROJECT: Decentralized Star Notary Service Project** - For this project, you will create a DApp by adding functionality with your smart contract and deploy it on the public testnet.",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frodoman/blockchain-p2-xhliu.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/frodoman/blockchain-p2-xhliu/issues"
+  },
+  "homepage": "https://github.com/frodoman/blockchain-p2-xhliu#readme",
+  "devDependencies": {
+    "@truffle/hdwallet-provider": "^2.1.1"
+  }
+}
