@@ -5,7 +5,8 @@
 1. Truffle version used for this project: v5.6.4
 2. OpenZepplin version: v4.8.0
 3. ERC721 token name: "Xing Star Notary", Symbol: XSN
-4. Token address for Goerli test newtork: (N/A)
+4. Contract address for Goerli test newtork: 0x926AB291919CBFCc4aa5FB1B130dC0B2Ba754Fb3 
+5. Deploy transaction hash: 0xc57491673c784e10361c380724bf9c001d0777b51e869cf6291a7898339751c7
 
 ### ToDo
 This Starter Code has already implemented the functionalities you implemented in the StarNotary (Version 2) exercise, and have comments in all the files you need to implement your tasks.

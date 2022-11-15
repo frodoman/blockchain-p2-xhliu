@@ -59,6 +59,7 @@ module.exports = {
     goerli: {
       provider: () => new HDWalletProvider(MNEMONIC, INFURA_API_KEY),
       network_id: '5',
+      from: '0xd54559a406d255Cdf864FA6207f9df2a144D67C4',
       gas: 4465030
     }
     // Another network with more advanced options...
